@@ -11,7 +11,9 @@ for (( i=1;i<=$c;i++ ))
 do
    rpc=$(cat test-rpc | head -$i | tail -1)
    status=$(/root/grpcurl --plaintext $rpc grpc.health.v1.Health/Check | jq -r .status)
-   printf "%s %-60s %s \n" $i $rpc $status
+   printf "%s %-60s" $i $rpc
+   status=$(/root/grpcurl --plaintext $rpc grpc.health.v1.Health/Check | jq -r .status)
+   printf "%s \n" $status
 done
 
 echo "------------------------"
