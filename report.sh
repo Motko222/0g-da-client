@@ -13,7 +13,6 @@ docker_status=$(docker inspect 0g-da-client | jq -r .[].State.Status)
 status="ok"
 [ "$node_status" != "SERVING" ] && status="error" && message="not serving"
 [ "$docker_status" != "running" ] && status="error" && message="docker not running ($docker_status)"
-echo $node_status $docker_status
 
 cat >$json << EOF
 {
