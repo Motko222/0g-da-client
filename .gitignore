@@ -1,2 +1,3 @@
 envfile.env
-rpc-test
+test-rpc
+env
