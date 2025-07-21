@@ -10,8 +10,8 @@ node_status=$(./grpcurl --plaintext localhost:51001 grpc.health.v1.Health/Check 
 docker_status=$(docker inspect 0g-da-client | jq -r .[].State.Status)
 
 status="ok"
-[ "$node_status" -ne "SERVING" ] && status=error && message="not serving"
-[ "$docker_status" -ne "running" ] && status="ok" && message="docker not running ($docker_status)"
+[ "$node_status" -ne "SERVING" ] && status="error" && message="not serving"
+[ "$docker_status" -ne "running" ] && status="error" && message="docker not running ($docker_status)"
 
 cat >$json << EOF
 {
