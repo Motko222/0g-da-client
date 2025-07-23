@@ -9,6 +9,7 @@ source $path/env
 cd /root
 node_status=$(./grpcurl --plaintext localhost:51001 grpc.health.v1.Health/Check | jq -r .status )
 docker_status=$(docker inspect 0g-da-client | jq -r .[].State.Status)
+url=$(wget -qO- eth0.me):51001
 
 status="ok"
 [ "$node_status" != "SERVING" ] && status="error" && message="not serving"
